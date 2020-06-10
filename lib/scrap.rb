@@ -9,7 +9,6 @@ module Scrap
   extend ParseOption
 
   def self.main
-    url = parse_options["url"]
-    fetch(url, "a", "href")
+    fetch(**parse_options)
   end
 end
