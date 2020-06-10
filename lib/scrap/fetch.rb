@@ -1,10 +1,11 @@
 require "open-uri"
 require "nokogiri"
+require 'faraday'
 
 module Scrap::Fetch
   def fetch(url:, selector:, attribute: nil)
     puts "fetch #{url} #{selector} #{attribute}"
-    raw_html = URI.open(url).read
+    raw_html = Faraday.get(url).body
     document = Nokogiri::HTML.parse(raw_html)
 
     if attribute
