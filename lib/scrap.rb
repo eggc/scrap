@@ -2,5 +2,8 @@ require "scrap/version"
 
 module Scrap
   class Error < StandardError; end
-  # Your code goes here...
+
+  def self.main
+    puts "hello"
+  end
 end
