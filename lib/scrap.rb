@@ -6,7 +6,12 @@ module Scrap
   class Error < StandardError; end
 
   def self.main(url)
+    puts fetch(url, "a")
+  end
+
+  def self.fetch(url, key)
     raw_html = open(url).read
-    puts Nokogiri::HTML.parse(raw_html)
+    document = Nokogiri::HTML.parse(raw_html)
+    document.css(key)
   end
 end
