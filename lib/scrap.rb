@@ -10,6 +10,6 @@ module Scrap
 
   def self.main
     url = parse_options["url"]
-    fetch(url, "a")
+    fetch(url, "a", "href")
   end
 end
