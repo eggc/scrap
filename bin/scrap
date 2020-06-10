@@ -2,9 +2,5 @@
 
 require "bundler/setup"
 require "scrap"
-require 'optparse'
 
-opts = ARGV.getopts("", "url:")
-opts["url"] ||= "https://google.co.jp"
-
-Scrap.main(opts["url"])
+puts Scrap.main
