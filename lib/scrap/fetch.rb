@@ -3,9 +3,14 @@ require "nokogiri"
 require 'faraday'
 
 module Scrap::Fetch
-  def fetch(url:, selector:, attribute: nil)
+  def fetch(url:, selector:, attribute: nil, cookie: nil)
     puts "fetch #{url} #{selector} #{attribute}"
-    raw_html = Faraday.get(url).body
+
+    response = Faraday.get(url) do |request|
+      request.headers['cookie'] = cookie if cookie
+    end
+
+    raw_html = response.body
     document = Nokogiri::HTML.parse(raw_html)
 
     if attribute

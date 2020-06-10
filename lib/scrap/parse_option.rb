@@ -7,6 +7,7 @@ module Scrap::ParseOption
     opt.on('--url=VAL') {|v| v }
     opt.on('--selector=VAL') {|v| v }
     opt.on('--attribute=VAL') {|v| v }
+    opt.on('--cookie=VAL') {|v| v }
     opt.parse!(ARGV, into: params)
     params
   end
