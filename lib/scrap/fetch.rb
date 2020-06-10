@@ -3,7 +3,7 @@ require "nokogiri"
 
 module Scrap::Fetch
   def fetch(url, key, attribute = nil)
-    raw_html = open(url).read
+    raw_html = URI.open(url).read
     document = Nokogiri::HTML.parse(raw_html)
 
     if attribute
