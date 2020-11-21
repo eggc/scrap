@@ -1,34 +1,44 @@
 # Scrap
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/scrap`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+scrap はコマンドラインでウェブサイトの任意要素を取り出す機能を提供する。コマンドラインで使用することもできるし、ruby スクリプトの中で使用することもできる。
 
 ## Installation
 
-Add this line to your application's Gemfile:
+コマンドラインで利用する場合はソースコードをダウンロードして実行する。
 
-```ruby
-gem 'scrap'
+```sh
+git clone git@github.com:eggc/scrap.git
+cd scrap
+bundle install
 ```
 
-And then execute:
+プロジェクトの Gemfile に下記の一行を記入して bundle install を実行すれば、ruby スクリプトから呼び出すことができる。
 
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install scrap
+```ruby
+gem 'scrap', git: 'git@github.com:eggc/scrap.git'
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+
+たとえば利用例: github.com のタグ `<img>` を抜き出すには下記のようにする。
+
+```sh
+bin/scrap --url https://github.com/ --selector img
+```
+
+ruby スクリプトとして使用する場合も同様に実行できる。
+
+```ruby
+elements = Scrap.fetch(url: "https://github.com/", selector: "img")
+elements.each do |element|
+  puts element.attr("src")
+end
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+開発時は bin/console を使って対話的コンソールを使いながらデバッグできる。
 
 ## Contributing
 
