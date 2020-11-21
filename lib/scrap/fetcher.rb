@@ -29,7 +29,16 @@ module Scrap
     end
 
     def fetch(url)
-      Scrap::Response.new(connection.get(url))
+      uri = URI.parse(url)
+      uri.scheme ||= 'https'
+
+      if uri.host
+        connection.host = uri.host
+      else
+        uri.host = connection.host
+      end
+
+      Scrap::Response.new(connection.get(uri.to_s))
     end
 
     def build_connection
