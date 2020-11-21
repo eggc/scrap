@@ -1,30 +1,29 @@
 require 'faraday'
 require 'faraday_middleware'
+require 'faraday-cookie_jar'
 require "scrap/cache"
 
 class Scrap::Request
   class << self
     attr_accessor :verbose
 
-    def call(url, cookie = nil)
+    def call(url)
       if verbose
-        puts "request #{url} #{cookie}"
+        puts "request #{url}"
       end
 
-      new(url, cookie).cache_or_request.body
+      new(url).cache_or_request.body
     end
   end
 
-  def initialize(url, cookie)
+  def initialize(url)
     @url = url
-    @cookie = cookie
     @connection = build_connection(url)
   end
 
   def cache_or_request
-    cache_key = [@url, @cookie].join
-    cache = Scrap::Cache.get(cache_key)
-    cache || Scrap::Cache.set(cache_key, request)
+    cache = Scrap::Cache.get(@url)
+    cache || Scrap::Cache.set(@url, request)
   end
 
   private
@@ -32,13 +31,12 @@ class Scrap::Request
   def build_connection(url)
     Faraday.new(url: url) do |faraday|
       faraday.use(FaradayMiddleware::FollowRedirects)
-      faraday.adapter Faraday.default_adapter
+      faraday.use(Faraday::CookieJar)
+      faraday.adapter(Faraday.default_adapter)
     end
   end
 
   def request
-    @connection.get do |request|
-      request.headers['cookie'] = @cookie if @cookie
-    end
+    @connection.get
   end
 end

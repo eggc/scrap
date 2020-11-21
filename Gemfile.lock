@@ -3,6 +3,7 @@ PATH
   specs:
     scrap (0.1.0)
       faraday (~> 1.0)
+      faraday-cookie_jar (~> 0.0)
       faraday_middleware (~> 1.0)
       nokogiri (~> 1.10)
 
@@ -10,11 +11,18 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.4.4)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
+    faraday-cookie_jar (0.0.7)
+      faraday (>= 0.8.0)
+      http-cookie (~> 1.0.0)
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     mini_portile2 (2.4.0)
     multipart-post (2.1.1)
     nokogiri (1.10.10)
@@ -34,6 +42,9 @@ GEM
       rspec-support (~> 3.10.0)
     rspec-support (3.10.0)
     ruby2_keywords (0.0.2)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.7)
 
 PLATFORMS
   ruby

@@ -1,6 +1,6 @@
 RSpec.describe Scrap::Request do
   let(:url) { 'https://www.google.co.jp' }
-  let(:instance) { described_class.new(url, 'cookie') }
+  let(:instance) { described_class.new(url) }
 
   describe 'cache_or_request' do
     context '2nd request' do

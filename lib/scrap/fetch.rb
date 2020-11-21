@@ -5,12 +5,12 @@ class Scrap::Fetch
   class << self
     attr_accessor :verbose
 
-    def call(url:, selector:, attribute: nil, cookie: nil)
+    def call(url:, selector:, attribute: nil)
       if verbose
         puts "fetch #{url} #{selector} #{attribute}"
       end
 
-      raw_html = Scrap::Request.call(url, cookie)
+      raw_html = Scrap::Request.call(url)
       document = Nokogiri::HTML.parse(raw_html)
       elements = document.css(selector)
       attribute ? pluck(elements, attribute) : elements
