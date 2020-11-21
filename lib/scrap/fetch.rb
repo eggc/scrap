@@ -14,7 +14,7 @@ class Scrap::Fetch
       raw_html = request(url, cookie).body
       document = Nokogiri::HTML.parse(raw_html)
       elements = document.css(selector)
-      pluck(elements, attribute)
+      attribute ? pluck(elements, attribute) : elements
     end
 
     private
@@ -30,8 +30,6 @@ class Scrap::Fetch
         elements.map do |element|
           element.get_attribute(attribute)
         end
-      else
-        elements
       end
     end
   end
