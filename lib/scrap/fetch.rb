@@ -4,8 +4,12 @@ require "scrap/cache"
 
 class Scrap::Fetch
   class << self
+    attr_accessor :verbose
+
     def call(url:, selector:, attribute: nil, cookie: nil)
-      puts "fetch #{url} #{selector} #{attribute}"
+      if verbose
+        puts "fetch #{url} #{selector} #{attribute}"
+      end
 
       raw_html = request(url, cookie).body
       document = Nokogiri::HTML.parse(raw_html)
