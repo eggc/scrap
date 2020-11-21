@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "pry-byebug"
 require "scrap"
 
 RSpec.configure do |config|
