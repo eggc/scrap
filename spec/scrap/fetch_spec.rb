@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Scrap::Fetch do
   let(:url) { 'https://www.google.co.jp' }
 

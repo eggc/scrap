@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Scrap::Request do
   describe 'request' do
     context 'follow redirect' do

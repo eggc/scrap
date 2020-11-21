@@ -1,43 +1,45 @@
+# frozen_string_literal: true
+
 require 'singleton'
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday-cookie_jar'
 
-class Scrap::Request
-  include Singleton
+module Scrap
+  class Request
+    include Singleton
 
-  class << self
-    attr_accessor :verbose
+    class << self
+      attr_accessor :verbose
 
-    def call(url)
-      if verbose
-        puts "request #{url}"
+      def call(url)
+        puts "request #{url}" if verbose
+
+        instance.request(url).body
       end
 
-      instance.request(url).body
+      # 現在のコネクションで使われるクッキーを返す
+      # 自動でクッキーは管理されているので基本的にこのメソッドを呼ぶ必要はない
+      def cookie(url: nil, host: nil)
+        instance.connection.host = host || URI.parse(url).host
+        instance.connection.head.env.request_headers['Cookie']
+      end
     end
 
-    # 現在のコネクションで使われるクッキーを返す
-    # 自動でクッキーは管理されているので基本的にこのメソッドを呼ぶ必要はない
-    def cookie(url: nil, host: nil)
-      instance.connection.host = host || URI.parse(url).host
-      instance.connection.head.env.request_headers["Cookie"]
+    def connection
+      @connection ||= build_connection
     end
-  end
 
-  def connection
-    @connection ||= build_connection
-  end
+    def request(url)
+      connection.get(url)
+    end
 
-  def request(url)
-    connection.get(url)
-  end
-
-  def build_connection
-    Faraday.new do |faraday|
-      faraday.use(FaradayMiddleware::FollowRedirects)
-      faraday.use(Faraday::CookieJar)
-      faraday.adapter(Faraday.default_adapter)
+    def build_connection
+      Faraday.new do |faraday|
+        faraday.use(FaradayMiddleware::FollowRedirects)
+        faraday.use(Faraday::CookieJar)
+        faraday.adapter(Faraday.default_adapter)
+      end
     end
   end
 end

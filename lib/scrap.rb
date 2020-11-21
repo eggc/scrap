@@ -1,6 +1,8 @@
-require "scrap/version"
-require "scrap/parse_option"
-require "scrap/fetch"
+# frozen_string_literal: true
+
+require 'scrap/version'
+require 'scrap/parse_option'
+require 'scrap/fetch'
 
 module Scrap
   class Error < StandardError; end
