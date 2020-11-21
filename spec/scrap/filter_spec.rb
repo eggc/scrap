@@ -21,14 +21,5 @@ RSpec.describe Scrap::Filter do
         expect(attributes).to all(be_a(String))
       end
     end
-
-    context 'verbose' do
-      it 'print message' do
-        expect do
-          described_class.verbose = true
-          described_class.call(html: @html, selector: 'img')
-        end.to output(/^filter /).to_stdout
-      end
-    end
   end
 end
