@@ -6,10 +6,10 @@ module Scrap
   # Scrap::Filter extracts the specified elements from a string of html
   class Filter
     class << self
-      def call(html:, selector:, attribute: nil)
+      def call(html:, selector: nil, attribute: nil)
         document = Nokogiri::HTML.parse(html)
-        elements = document.css(selector)
-        attribute ? pluck(elements, attribute) : elements
+        document = document.css(selector) if selector
+        attribute ? pluck(document, attribute) : document
       end
 
       private

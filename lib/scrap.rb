@@ -15,7 +15,7 @@ module Scrap
     fetch(**parse_options)
   end
 
-  def self.fetch(url:, selector:, attribute: nil)
+  def self.fetch(url:, selector: nil, attribute: nil)
     response = Scrap::Fetcher.call(url)
 
     if response.html?
@@ -24,6 +24,8 @@ module Scrap
         selector: selector,
         attribute: attribute
       )
+    else
+      response.body
     end
   end
 end
