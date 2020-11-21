@@ -1,6 +1,5 @@
 require "nokogiri"
-require 'faraday'
-require "scrap/cache"
+require "scrap/request"
 
 class Scrap::Fetch
   class << self
@@ -11,25 +10,13 @@ class Scrap::Fetch
         puts "fetch #{url} #{selector} #{attribute}"
       end
 
-      raw_html = cache_or_request(url, cookie).body
+      raw_html = Scrap::Request.call(url, cookie)
       document = Nokogiri::HTML.parse(raw_html)
       elements = document.css(selector)
       attribute ? pluck(elements, attribute) : elements
     end
 
     private
-
-    def cache_or_request(url, cookie)
-      cache_key = [url, cookie].join
-      cache = Scrap::Cache.get(cache_key)
-      cache || Scrap::Cache.set(cache_key, request(url, cookie))
-    end
-
-    def request(url, cookie)
-      Faraday.get(url) do |request|
-        request.headers['cookie'] = cookie if cookie
-      end
-    end
 
     def pluck(elements, attribute)
       if attribute
