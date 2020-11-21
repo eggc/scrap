@@ -18,7 +18,7 @@ module Scrap
   def self.fetch(url:, selector:, attribute: nil)
     response = Scrap::Request.call(url)
 
-    if response.body
+    if response.html?
       Scrap::Filter.call(
         html: response.body,
         selector: selector,

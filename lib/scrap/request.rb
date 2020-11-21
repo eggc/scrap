@@ -4,6 +4,7 @@ require 'singleton'
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday-cookie_jar'
+require 'scrap/response'
 
 module Scrap
   # Scrap::Request has a cookie and works like some kind of web browser
@@ -28,7 +29,7 @@ module Scrap
     end
 
     def request(url)
-      connection.get(url)
+      Scrap::Response.new(connection.get(url))
     end
 
     def build_connection

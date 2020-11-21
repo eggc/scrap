@@ -8,6 +8,7 @@ RSpec.describe Scrap::Request do
       it 'return html element' do
         response = described_class.instance.request(url)
         expect(response.status).to eq(200)
+        expect(response).to be_html
       end
     end
   end
