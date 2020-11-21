@@ -2,7 +2,7 @@
 
 RSpec.describe Scrap::Filter do
   before(:all) do
-    @html = Scrap::Request.call('https://www.google.co.jp').body
+    @html = Scrap::Fetcher.call('https://www.google.co.jp').body
   end
 
   describe '.call' do

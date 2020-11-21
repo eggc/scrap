@@ -7,13 +7,13 @@ require 'faraday-cookie_jar'
 require 'scrap/response'
 
 module Scrap
-  # Scrap::Request has a cookie and works like some kind of web browser
-  class Request
+  # Scrap::Fetcher fetch files from web sites
+  class Fetcher
     include Singleton
 
     class << self
       def call(url)
-        instance.request(url)
+        instance.fetch(url)
       end
 
       # @return [String] cookie used in connection
@@ -28,7 +28,7 @@ module Scrap
       @connection ||= build_connection
     end
 
-    def request(url)
+    def fetch(url)
       Scrap::Response.new(connection.get(url))
     end
 
