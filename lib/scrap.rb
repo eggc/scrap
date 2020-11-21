@@ -1,6 +1,7 @@
 require "scrap/version"
 require "scrap/parse_option"
 require "scrap/fetch"
+require "scrap/cache"
 
 module Scrap
   class Error < StandardError; end
