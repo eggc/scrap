@@ -2,6 +2,7 @@
 
 require 'scrap/version'
 require 'scrap/parse_option'
+require 'scrap/request'
 require 'scrap/filter'
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
@@ -14,7 +15,13 @@ module Scrap
     fetch(**parse_options)
   end
 
-  def self.fetch(**args)
-    Scrap::Filter.call(args)
+  def self.fetch(url:, selector:, attribute: nil)
+    html = Scrap::Request.call(url)
+
+    Scrap::Filter.call(
+      html: html,
+      selector: selector,
+      attribute: attribute
+    )
   end
 end

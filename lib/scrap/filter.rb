@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
-require 'scrap/request'
 
 module Scrap
   # Scrap::Filter extracts the specified elements from a string of html
@@ -9,11 +8,10 @@ module Scrap
     class << self
       attr_accessor :verbose
 
-      def call(url:, selector:, attribute: nil)
-        puts "filter #{url} #{selector} #{attribute}" if verbose
+      def call(html:, selector:, attribute: nil)
+        puts "filter by #{selector} #{attribute}" if verbose
 
-        raw_html = Scrap::Request.call(url)
-        document = Nokogiri::HTML.parse(raw_html)
+        document = Nokogiri::HTML.parse(html)
         elements = document.css(selector)
         attribute ? pluck(elements, attribute) : elements
       end
