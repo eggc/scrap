@@ -4,13 +4,13 @@ require 'nokogiri'
 require 'scrap/request'
 
 module Scrap
-  # Scrap::Fetch extracts the specified elements from a string of html
-  class Fetch
+  # Scrap::Filter extracts the specified elements from a string of html
+  class Filter
     class << self
       attr_accessor :verbose
 
       def call(url:, selector:, attribute: nil)
-        puts "fetch #{url} #{selector} #{attribute}" if verbose
+        puts "filter #{url} #{selector} #{attribute}" if verbose
 
         raw_html = Scrap::Request.call(url)
         document = Nokogiri::HTML.parse(raw_html)

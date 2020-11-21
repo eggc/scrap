@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Scrap::Fetch do
+RSpec.describe Scrap::Filter do
   let(:url) { 'https://www.google.co.jp' }
 
   describe '.call' do
@@ -25,7 +25,7 @@ RSpec.describe Scrap::Fetch do
         expect do
           described_class.verbose = true
           described_class.call(url: url, selector: 'img')
-        end.to output(/^fetch /).to_stdout
+        end.to output(/^filter /).to_stdout
       end
     end
   end
