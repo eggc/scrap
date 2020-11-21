@@ -4,7 +4,7 @@ RSpec.describe Scrap::Request do
       let(:url) { 'https://google.co.jp' }
 
       it 'return html element' do
-        response = described_class.new(url).request
+        response = described_class.instance.request(url)
         expect(response.status).to eq(200)
       end
     end
