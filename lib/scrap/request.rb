@@ -1,7 +1,6 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday-cookie_jar'
-require "scrap/cache"
 
 class Scrap::Request
   class << self
@@ -12,7 +11,7 @@ class Scrap::Request
         puts "request #{url}"
       end
 
-      new(url).cache_or_request.body
+      new(url).request.body
     end
   end
 
@@ -21,9 +20,14 @@ class Scrap::Request
     @connection = build_connection(url)
   end
 
-  def cache_or_request
-    cache = Scrap::Cache.get(@url)
-    cache || Scrap::Cache.set(@url, request)
+  # 現在のコネクションで使われるクッキーを返す
+  # 自動でクッキーは管理されているので、内容確認以外の目的でこのメソッドを呼ぶ必要はない
+  def cookie
+    @connection.head.env.request_headers["Cookie"]
+  end
+
+  def request
+    @connection.get
   end
 
   private
@@ -34,9 +38,5 @@ class Scrap::Request
       faraday.use(Faraday::CookieJar)
       faraday.adapter(Faraday.default_adapter)
     end
-  end
-
-  def request
-    @connection.get
   end
 end
