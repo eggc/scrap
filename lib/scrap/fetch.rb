@@ -4,6 +4,7 @@ require 'nokogiri'
 require 'scrap/request'
 
 module Scrap
+  # Scrap::Fetch extracts the specified elements from a string of html
   class Fetch
     class << self
       attr_accessor :verbose
@@ -20,10 +21,8 @@ module Scrap
       private
 
       def pluck(elements, attribute)
-        if attribute
-          elements.map do |element|
-            element.get_attribute(attribute)
-          end
+        elements.map do |element|
+          element.get_attribute(attribute)
         end
       end
     end

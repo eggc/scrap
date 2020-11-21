@@ -3,6 +3,7 @@
 require 'optparse'
 
 module Scrap
+  # ParseOption interprets the program arguments
   module ParseOption
     def parse_options
       params = default_options

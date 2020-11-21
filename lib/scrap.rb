@@ -4,6 +4,7 @@ require 'scrap/version'
 require 'scrap/parse_option'
 require 'scrap/fetch'
 
+# Scrap provides the ability to retrieve arbitrary elements of a website.
 module Scrap
   class Error < StandardError; end
 

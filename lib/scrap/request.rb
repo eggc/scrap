@@ -6,6 +6,7 @@ require 'faraday_middleware'
 require 'faraday-cookie_jar'
 
 module Scrap
+  # Scrap::Request has a cookie and works like some kind of web browser
   class Request
     include Singleton
 
@@ -18,8 +19,8 @@ module Scrap
         instance.request(url).body
       end
 
-      # 現在のコネクションで使われるクッキーを返す
-      # 自動でクッキーは管理されているので基本的にこのメソッドを呼ぶ必要はない
+      # @return [String] cookie used in connection
+      # @note Basically, there is no need to call this method because the cookie is managed by middleware
       def cookie(url: nil, host: nil)
         instance.connection.host = host || URI.parse(url).host
         instance.connection.head.env.request_headers['Cookie']
