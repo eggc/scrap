@@ -11,12 +11,8 @@ module Scrap
     include Singleton
 
     class << self
-      attr_accessor :verbose
-
       def call(url)
-        puts "request #{url}" if verbose
-
-        instance.request(url).body
+        instance.request(url)
       end
 
       # @return [String] cookie used in connection

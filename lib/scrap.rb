@@ -16,12 +16,14 @@ module Scrap
   end
 
   def self.fetch(url:, selector:, attribute: nil)
-    html = Scrap::Request.call(url)
+    response = Scrap::Request.call(url)
 
-    Scrap::Filter.call(
-      html: html,
-      selector: selector,
-      attribute: attribute
-    )
+    if response.body
+      Scrap::Filter.call(
+        html: response.body,
+        selector: selector,
+        attribute: attribute
+      )
+    end
   end
 end
