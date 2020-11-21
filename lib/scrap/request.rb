@@ -1,4 +1,5 @@
 require 'faraday'
+require 'faraday_middleware'
 require "scrap/cache"
 
 class Scrap::Request
@@ -10,21 +11,34 @@ class Scrap::Request
         puts "request #{url} #{cookie}"
       end
 
-      cache_or_request(url, cookie).body
+      new(url, cookie).cache_or_request.body
     end
+  end
 
-    private
+  def initialize(url, cookie)
+    @url = url
+    @cookie = cookie
+    @connection = build_connection(url)
+  end
 
-    def cache_or_request(url, cookie)
-      cache_key = [url, cookie].join
-      cache = Scrap::Cache.get(cache_key)
-      cache || Scrap::Cache.set(cache_key, request(url, cookie))
+  def cache_or_request
+    cache_key = [@url, @cookie].join
+    cache = Scrap::Cache.get(cache_key)
+    cache || Scrap::Cache.set(cache_key, request)
+  end
+
+  private
+
+  def build_connection(url)
+    Faraday.new(url: url) do |faraday|
+      faraday.use(FaradayMiddleware::FollowRedirects)
+      faraday.adapter Faraday.default_adapter
     end
+  end
 
-    def request(url, cookie)
-      Faraday.get(url) do |request|
-        request.headers['cookie'] = cookie if cookie
-      end
+  def request
+    @connection.get do |request|
+      request.headers['cookie'] = @cookie if @cookie
     end
   end
 end
