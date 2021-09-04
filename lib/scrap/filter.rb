@@ -9,7 +9,7 @@ module Scrap
       def call(html:, selector: nil, attribute: nil)
         document = Nokogiri::HTML.parse(html)
         document = document.css(selector) if selector
-        attribute ? pluck(document, attribute) : document
+        attribute ? pluck(document, attribute) : document.map(&:inner_text)
       end
 
       private

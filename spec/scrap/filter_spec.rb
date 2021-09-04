@@ -8,9 +8,9 @@ RSpec.describe Scrap::Filter do
   describe '.call' do
     context 'without attribute' do
       it 'returns elements' do
-        elements = described_class.call(html: @html, selector: 'img')
+        elements = described_class.call(html: @html, selector: 'div')
         expect(elements.size).to be > 0
-        expect(elements).to all(be_a(Nokogiri::XML::Element))
+        expect(elements).to all(be_a(String))
       end
     end
 

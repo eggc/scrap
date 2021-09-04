@@ -32,7 +32,7 @@ module Scrap
       end
     end
 
-    def query(selector, attribute)
+    def query(selector, attribute = nil)
       Scrap::Filter.call(
         html: @faraday_response.body,
         selector: selector,
