@@ -12,8 +12,8 @@ RSpec.describe Scrap::Fetcher do
   end
 
   describe 'fetch' do
-    it do
-      @fetcher = described_class.new('www.google.co.jp')
+    it 'can multiple request with cookies' do
+      @fetcher = described_class.new('google.co.jp', { '1P_JAR' => '2020-09-02-10' })
 
       response = @fetcher.fetch('/search?q=test')
       expect(response.status).to eq(200)
@@ -22,8 +22,6 @@ RSpec.describe Scrap::Fetcher do
       response = @fetcher.fetch('/search?q=test2')
       expect(response.status).to eq(200)
       expect(response).to be_html
-
-      expect(@fetcher.cookie).to be_a(String)
     end
   end
 end
