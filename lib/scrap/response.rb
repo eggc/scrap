@@ -23,6 +23,12 @@ module Scrap
       content_type.start_with?('image')
     end
 
+    def save_to(path)
+      File.open(path, 'wb') do |file|
+        file.write(@faraday_response.body)
+      end
+    end
+
     def_delegators :@faraday_response, :body, :status
   end
 end
