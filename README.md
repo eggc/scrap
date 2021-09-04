@@ -1,18 +1,10 @@
 # Scrap
 
-scrap はコマンドラインでウェブサイトの任意要素を取り出す機能を提供する。コマンドラインで使用することもできるし、ruby スクリプトの中で使用することもできる。
+scrap はウェブサイトの任意要素を取り出す機能を提供する。
 
 ## Installation
 
-コマンドラインで利用する場合はソースコードをダウンロードして実行する。
-
-```sh
-git clone git@github.com:eggc/scrap.git
-cd scrap
-bundle install
-```
-
-プロジェクトの Gemfile に下記の一行を記入して bundle install を実行すれば、ruby スクリプトから呼び出すことができる。
+Gemfile に下記の行を書き込み bundle install を実行する。
 
 ```ruby
 gem 'scrap', git: 'git@github.com:eggc/scrap.git'
@@ -21,13 +13,7 @@ gem 'scrap', git: 'git@github.com:eggc/scrap.git'
 ## Usage
 
 
-たとえば利用例: github.com のタグ `<img>` を抜き出すには下記のようにする。
-
-```sh
-bin/scrap --url https://github.com/ --selector img
-```
-
-ruby スクリプトとして使用する場合も同様に実行できる。
+たとえば github.com のタグ `<img>` を抜き出し、画像の URL を取得するには下記のようにする。
 
 ```ruby
 elements = Scrap.fetch(url: "https://github.com/", selector: "img")
