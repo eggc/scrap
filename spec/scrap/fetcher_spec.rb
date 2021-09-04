@@ -9,14 +9,21 @@ RSpec.describe Scrap::Fetcher do
         expect(response).to be_html
       end
     end
+  end
 
-    context 'reuse host and scheme' do
-      it do
-        described_class.call('https://www.google.co.jp')
-        response = described_class.call('/search?q=test')
-        expect(response.status).to eq(200)
-        expect(response).to be_html
-      end
+  describe 'fetch' do
+    it do
+      @fetcher = described_class.new('www.google.co.jp')
+
+      response = @fetcher.fetch('/search?q=test')
+      expect(response.status).to eq(200)
+      expect(response).to be_html
+
+      response = @fetcher.fetch('/search?q=test2')
+      expect(response.status).to eq(200)
+      expect(response).to be_html
+
+      expect(@fetcher.cookie).to be_a(String)
     end
   end
 end
