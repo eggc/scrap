@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'scrap/filter'
 
 module Scrap
   # Scrap::Response is wrapper of Faraday::Response
   class Response
     extend Forwardable
+
+    def_delegators :@faraday_response, :body, :status
 
     def initialize(faraday_response)
       @faraday_response = faraday_response
@@ -29,6 +32,12 @@ module Scrap
       end
     end
 
-    def_delegators :@faraday_response, :body, :status
+    def query(selector, attribute)
+      Scrap::Filter.call(
+        html: @faraday_response.body,
+        selector: selector,
+        attribute: attribute
+      )
+    end
   end
 end

@@ -2,19 +2,18 @@
 
 require 'scrap/version'
 require 'scrap/fetcher'
-require 'scrap/filter'
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
 module Scrap
+  def self.get(url)
+    Scrap::Fetcher.call(url)
+  end
+
   def self.fetch(url:, selector: nil, attribute: nil)
-    response = Scrap::Fetcher.call(url)
+    response = get(url)
 
     if response.html?
-      Scrap::Filter.call(
-        html: response.body,
-        selector: selector,
-        attribute: attribute
-      )
+      response.query(selector, attribute)
     else
       response.body
     end
