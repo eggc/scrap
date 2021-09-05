@@ -26,6 +26,10 @@ module Scrap
       content_type.start_with?('image')
     end
 
+    def url
+      @faraday_response.env.url
+    end
+
     def save_to(path)
       File.open(path, 'wb') do |file|
         file.write(@faraday_response.body)
