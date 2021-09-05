@@ -23,7 +23,7 @@ module Scrap
     end
 
     def image?
-      content_type.start_with?('image')
+      content_type.start_with?('image') || content_type == 'jpg'
     end
 
     def url
