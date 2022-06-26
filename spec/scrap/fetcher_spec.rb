@@ -6,7 +6,7 @@ RSpec.describe Scrap::Fetcher do
       it 'return html element' do
         response = described_class.call('https://google.co.jp')
         expect(response.status).to eq(200)
-        expect(response).to be_html
+        expect(response).to be_a(Faraday::Response)
       end
     end
   end
@@ -17,11 +17,11 @@ RSpec.describe Scrap::Fetcher do
 
       response = @fetcher.fetch('/search?q=test')
       expect(response.status).to eq(200)
-      expect(response).to be_html
+      expect(response).to be_a(Faraday::Response)
 
       response = @fetcher.fetch('/search?q=test2')
       expect(response.status).to eq(200)
-      expect(response).to be_html
+      expect(response).to be_a(Faraday::Response)
     end
   end
 end

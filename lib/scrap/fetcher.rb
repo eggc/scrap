@@ -3,7 +3,6 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday-cookie_jar'
-require 'scrap/response'
 require 'scrap/cookie'
 
 module Scrap
@@ -22,7 +21,7 @@ module Scrap
     end
 
     def fetch(path)
-      Scrap::Response.new(@connection.get(path))
+      @connection.get(path)
     end
 
     private
