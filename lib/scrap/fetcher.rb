@@ -5,7 +5,7 @@ require 'faraday_middleware'
 require 'faraday-cookie_jar'
 require 'scrap/cookie'
 
-module Scrap
+class Scrap
   # Scrap::Fetcher fetch files from web sites
   class Fetcher
     class << self

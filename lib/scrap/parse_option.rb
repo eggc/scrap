@@ -2,7 +2,7 @@
 
 require 'optparse'
 
-module Scrap
+class Scrap
   # ParseOption interprets the program arguments
   module ParseOption
     def parse_options

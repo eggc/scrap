@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Scrap
+class Scrap
   # Scrap::Cookie setup HTTP::CookieJar from any hash
   class Cookie
     attr_reader :jar

@@ -3,7 +3,7 @@
 require 'forwardable'
 require 'json'
 
-module Scrap
+class Scrap
   # Scrap::Response is wrapper of Faraday::Response
   class Response
     extend Forwardable
