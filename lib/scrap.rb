@@ -3,7 +3,7 @@
 require 'scrap/version'
 require 'scrap/fetcher'
 require 'scrap/response'
-require 'scrap/page'
+require 'scrap/html'
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
 class Scrap
