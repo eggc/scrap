@@ -15,15 +15,23 @@ module Scrap
     end
 
     def content_type
-      @faraday_response.headers['content-type']
+      case @faraday_response.headers['content-type']
+      when /text\/html/ then :html
+      when /^image|jpe?g|png/ then :image
+      when "application/json" then :json
+      end
     end
 
     def html?
-      content_type.start_with?('text/html')
+      content_type == :html
     end
 
     def image?
-      content_type.start_with?('image') || content_type == 'jpg'
+      content_type == :image
+    end
+
+    def json?
+      content_type == :json
     end
 
     def url
