@@ -19,7 +19,7 @@ class Scrap
     when :html
       Scrap::HTML.new(response.body)
     when :image
-      Scrap::Image.new(response.body)
+      Scrap::Image.new(response.file_name, response.body)
     else
       message = "#{self.class.name} #{__method__} cannot receive a content-type #{response.content_type}"
       raise ArgumentError.new(message)

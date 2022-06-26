@@ -41,11 +41,5 @@ class Scrap
     def file_name
       @faraday_response.env.url.to_s.split('/').last
     end
-
-    def save_to(path)
-      File.open(path, 'wb') do |file|
-        file.write(@faraday_response.body)
-      end
-    end
   end
 end
