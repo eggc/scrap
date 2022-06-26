@@ -38,8 +38,12 @@ class Scrap
       JSON.parse(body)
     end
 
+    def url
+      @faraday_response.env.url
+    end
+
     def file_name
-      @faraday_response.env.url.to_s.split('/').last
+      url.to_s.split('/').last
     end
   end
 end
