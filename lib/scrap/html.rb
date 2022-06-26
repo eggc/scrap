@@ -16,8 +16,6 @@ class Scrap
       query(selector: 'img', attribute: 'src').compact
     end
 
-    private
-
     def query(selector:, attribute:)
       elements = @html
       elements = @html.css(selector) if selector
