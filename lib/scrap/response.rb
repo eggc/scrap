@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'forwardable'
-require 'scrap/filter'
 
 module Scrap
   # Scrap::Response is wrapper of Faraday::Response
@@ -42,14 +41,6 @@ module Scrap
       File.open(path, 'wb') do |file|
         file.write(@faraday_response.body)
       end
-    end
-
-    def query(selector, attribute = nil)
-      Scrap::Filter.call(
-        html: @faraday_response.body,
-        selector: selector,
-        attribute: attribute
-      )
     end
   end
 end

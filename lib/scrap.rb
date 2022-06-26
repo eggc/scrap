@@ -3,6 +3,7 @@
 require 'scrap/version'
 require 'scrap/fetcher'
 require 'scrap/response'
+require 'scrap/filter'
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
 module Scrap
@@ -14,7 +15,11 @@ module Scrap
     response = get(url)
 
     if response.html?
-      response.query(selector, attribute)
+      Scrap::Filter.call(
+        html: response.body,
+        selector: selector,
+        attribute: attribute
+      )
     else
       response.body
     end

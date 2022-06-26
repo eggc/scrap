@@ -26,13 +26,4 @@ RSpec.describe Scrap::Response do
       end
     end
   end
-
-  describe 'query' do
-    subject { response.query('img', 'src') }
-
-    context 'selector and attribute' do
-      let(:url) { 'https://www.google.com/' }
-      it { should be_any }
-    end
-  end
 end
