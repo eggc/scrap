@@ -16,10 +16,7 @@ gem 'scrap', git: 'git@github.com:eggc/scrap.git'
 たとえば github.com のタグ `<img>` を抜き出し、画像の URL を取得するには下記のようにする。
 
 ```ruby
-elements = Scrap.fetch(url: "https://github.com/", selector: "img")
-elements.each do |element|
-  puts element.attr("src")
-end
+Scrap.new("github.com").get('/').image_urls
 ```
 
 ## Development
