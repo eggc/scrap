@@ -34,12 +34,12 @@ class Scrap
       content_type == :json
     end
 
-    def url
-      @faraday_response.env.url
-    end
-
     def to_h
       JSON.parse(body)
+    end
+
+    def file_name
+      @faraday_response.env.url.to_s.split('/').last
     end
 
     def save_to(path)

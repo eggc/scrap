@@ -17,6 +17,12 @@ RSpec.describe Scrap::Response do
     end
   end
 
+  describe 'file_name' do
+    subject { response.file_name }
+    let(:url) { 'https://via.placeholder.com/150' }
+    it { should eq('150') }
+  end
+
   describe 'save_to' do
     let(:url) { 'https://via.placeholder.com/150' }
     it do
