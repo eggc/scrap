@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'json'
 
 module Scrap
   # Scrap::Response is wrapper of Faraday::Response
@@ -35,6 +36,10 @@ module Scrap
 
     def url
       @faraday_response.env.url
+    end
+
+    def to_h
+      JSON.parse(body)
     end
 
     def save_to(path)
