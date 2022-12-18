@@ -6,11 +6,11 @@ require 'faraday-cookie_jar'
 require 'scrap/cookie'
 
 class Scrap
-  # Scrap::Fetcher fetch files from web sites
-  class Fetcher
+  # Scrap::Browser browse files from web sites
+  class Browser
     class << self
       def call(url)
-        new.fetch(url)
+        new.get(url)
       end
     end
 
@@ -20,7 +20,7 @@ class Scrap
       @connection = build_connection(host, @cookie)
     end
 
-    def fetch(path)
+    def get(path)
       @connection.get(path)
     end
 

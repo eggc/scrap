@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'scrap/version'
-require 'scrap/fetcher'
+require 'scrap/browser'
 require 'scrap/response'
 require 'scrap/html'
 require 'scrap/image'
@@ -9,11 +9,11 @@ require 'scrap/image'
 # Scrap provides the ability to retrieve arbitrary elements of a website.
 class Scrap
   def initialize(host)
-    @fetcher = Scrap::Fetcher.new(host)
+    @browser = Scrap::Browser.new(host)
   end
 
   def get(path)
-    response = Scrap::Response.new(@fetcher.fetch(path))
+    response = Scrap::Response.new(@browser.get(path))
 
     case response.content_type
     when :html
