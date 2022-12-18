@@ -24,6 +24,12 @@ class Scrap
       @connection.get(path)
     end
 
+    def post(path, **body)
+      @connection.post(path) do |request|
+        request.body = body
+      end
+    end
+
     private
 
     def build_connection(host, cookie)
