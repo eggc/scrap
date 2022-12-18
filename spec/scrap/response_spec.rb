@@ -12,14 +12,14 @@ RSpec.describe Scrap::Response do
     end
 
     context 'image' do
-      let(:url) { 'https://via.placeholder.com/150' }
+      let(:url) { 'https://images.dog.ceo/breeds/bluetick/n02088632_2736.jpg' }
       it { should be_image }
     end
   end
 
   describe 'file_name' do
     subject { response.file_name }
-    let(:url) { 'https://via.placeholder.com/150' }
-    it { should eq('150') }
+    let(:url) { 'https://images.dog.ceo/breeds/bluetick/n02088632_2736.jpg' }
+    it { should eq('n02088632_2736.jpg') }
   end
 end
