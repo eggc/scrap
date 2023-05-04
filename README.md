@@ -19,9 +19,23 @@ gem 'scrap', git: 'git@github.com:eggc/scrap.git'
 Scrap.new("github.com").get('/').image_urls
 ```
 
+今後予定していること
+
+- リトライ機能
+- 画像の保存先ディレクトリを事前に config に入れる
+- 画像の解像度を均質化
+- 画像のメタ情報を削除
+- 画像の pdf 化
+- クローラー（始点、ステップ、終点）
+
 ## Development
 
-開発時は bin/console を使って対話的コンソールを使いながらデバッグできる。
+```bash
+docker build -t scrap .
+docker run -it --rm --mount type=bind,source=`pwd`,target=/app scrap /bin/bash
+
+bin/rspec
+```
 
 ## Contributing
 
