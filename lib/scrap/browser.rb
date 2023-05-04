@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'faraday_middleware'
 require 'faraday-cookie_jar'
+require 'faraday/follow_redirects'
 require 'scrap/cookie'
 
 class Scrap
@@ -36,7 +36,8 @@ class Scrap
       base_url = URI::HTTPS.build(host: host)
 
       Faraday.new(base_url) do |faraday|
-        faraday.use(FaradayMiddleware::FollowRedirects)
+        faraday.response :follow_redirects
+
         faraday.use(Faraday::CookieJar, jar: cookie.jar)
         faraday.adapter(Faraday.default_adapter)
       end
