@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'dry-configurable'
+
 require 'scrap/version'
 require 'scrap/browser'
 require 'scrap/response'
@@ -8,6 +10,10 @@ require 'scrap/image'
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
 class Scrap
+  extend Dry::Configurable
+
+  setting :working_directory, default: '/tmp/scrap/', constructor: proc { |v| Pathname.new(v) }
+
   def initialize(host)
     @browser = Scrap::Browser.new(host)
   end

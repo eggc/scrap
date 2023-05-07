@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Scrap
   class Image
     def initialize(name, content)
@@ -6,7 +8,9 @@ class Scrap
     end
 
     def save
-      File.open(@name, 'wb') do |file|
+      dir = Scrap.config.working_directory
+      FileUtils.mkdir_p(dir)
+      File.open(dir.join(@name), 'wb') do |file|
         file.write(@content)
       end
     end
