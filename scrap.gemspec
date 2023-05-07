@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday-cookie_jar', '~> 0.0'
   spec.add_dependency 'faraday-follow_redirects', '~> 0.3'
   spec.add_dependency 'nokogiri', '~> 1.14'
+  spec.add_dependency 'dry-configurable', '~> 0.16'
 end
