@@ -3,7 +3,6 @@
 require 'faraday'
 require 'faraday-cookie_jar'
 require 'faraday/follow_redirects'
-require 'scrap/cookie'
 
 class Scrap
   # Scrap::Browser browse files from web sites

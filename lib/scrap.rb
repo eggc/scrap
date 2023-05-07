@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require 'dry-configurable'
+require 'zeitwerk'
 
-require 'scrap/version'
-require 'scrap/browser'
-require 'scrap/response'
-require 'scrap/html'
-require 'scrap/image'
+loader = Zeitwerk::Loader.for_gem
+loader.inflector.inflect("html" => "HTML")
+loader.setup
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
 class Scrap
