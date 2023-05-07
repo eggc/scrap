@@ -3,6 +3,7 @@
 require 'nokogiri'
 
 class Scrap
+  # Scrap::HTML parse html_string
   class HTML
     def initialize(html_string)
       @html = Nokogiri::HTML.parse(html_string)
