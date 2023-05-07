@@ -12,6 +12,7 @@ class Scrap
   extend Dry::Configurable
 
   setting :working_directory, default: '/tmp/scrap/', constructor: proc { |v| Pathname.new(v) }
+  setting :pixel_width, default: 2560
 
   def initialize(host)
     @browser = Scrap::Browser.new(host)

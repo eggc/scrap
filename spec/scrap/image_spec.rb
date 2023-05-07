@@ -3,9 +3,10 @@
 RSpec.describe Scrap::Image do
   describe 'save' do
     it do
-      image = Scrap::Image.new('test.png', 'xxx')
+      binary = File.binread('spec/fixtures/image/test.jpeg')
+      image = Scrap::Image.new('test', binary)
       image.save
-      expect(File.read('/tmp/scrap/test.png')).to eq('xxx')
+      expect(File.exist?('/tmp/scrap/test')).to eq(true)
     end
   end
 end

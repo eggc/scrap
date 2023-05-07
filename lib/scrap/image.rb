@@ -13,9 +13,7 @@ class Scrap
     def save
       dir = Scrap.config.working_directory
       FileUtils.mkdir_p(dir)
-      File.open(dir.join(@name), 'wb') do |file|
-        file.write(@binary)
-      end
+      Scrap::ImageConverter.new(@binary).write(dir.join(@name))
     end
   end
 end
