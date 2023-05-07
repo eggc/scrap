@@ -16,9 +16,9 @@ class Scrap
 
     def content_type
       case @faraday_response.headers['content-type']
-      when /text\/html/ then :html
+      when %r{text/html} then :html
       when /^image|jpe?g|png/ then :image
-      when "application/json" then :json
+      when 'application/json' then :json
       end
     end
 

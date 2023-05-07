@@ -32,7 +32,7 @@ class Scrap
     private
 
     def build_connection(host, cookie)
-      base_url = URI::HTTPS.build(host: host)
+      base_url = URI::HTTPS.build(host:)
 
       Faraday.new(base_url) do |faraday|
         faraday.response :follow_redirects

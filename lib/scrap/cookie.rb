@@ -19,8 +19,8 @@ class Scrap
       hash.map do |key, value|
         HTTP::Cookie.new(
           name: key,
-          value: value,
-          domain: domain,
+          value:,
+          domain:,
           for_domain: true,
           path: '/',
           max_age: 7 * 86_400

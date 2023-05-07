@@ -4,7 +4,7 @@ require 'dry-configurable'
 require 'zeitwerk'
 
 loader = Zeitwerk::Loader.for_gem
-loader.inflector.inflect("html" => "HTML")
+loader.inflector.inflect('html' => 'HTML')
 loader.setup
 
 # Scrap provides the ability to retrieve arbitrary elements of a website.
@@ -27,7 +27,7 @@ class Scrap
       Scrap::Image.new(response.file_name, response.body)
     else
       message = "#{self.class.name} #{__method__} cannot receive a content-type #{response.content_type}"
-      raise ArgumentError.new(message)
+      raise ArgumentError, message
     end
   end
 end
