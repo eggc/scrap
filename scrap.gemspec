@@ -29,9 +29,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'dry-configurable', '~> 0.16'
   spec.add_dependency 'faraday', '~> 2.7'
   spec.add_dependency 'faraday-cookie_jar', '~> 0.0'
   spec.add_dependency 'faraday-follow_redirects', '~> 0.3'
   spec.add_dependency 'nokogiri', '~> 1.14'
-  spec.add_dependency 'dry-configurable', '~> 0.16'
+  spec.add_dependency 'zeitwerk', '~> 2.6'
 end
